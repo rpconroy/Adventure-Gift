@@ -18,15 +18,21 @@ function Adventure(name)
     this.POIs = [];
     this.name = name;
 
-    // Init ActionListeners(scrolldown, resize)
+    // Choose scroll direction
 
-    // Get Screen Dimensions
-    // Create SVG
-    d3.select
+    // Init ActionListeners(scrolldown, resize)
+    this.initActionListeners()
+
     // Create Welcome mesage
     //
 }
 
+Adventure.prototype.initActionListeners = function()
+{
+    var zoom = d3.behavior.zoom();
+    this.call(zoom);
+
+}
 Adventure.prototype.getDims = function()
 {
     this.width = window.innerWidth;

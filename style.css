@@ -1,7 +1,16 @@
+html
+{
+    overflow : hidden;
+}
 body
 {
     background-image : url('images/palm-leaf.png');
     background-repeat : repeat;
-    background-color : lightbrown;
     margin:0;
+    opacity : .5;
 }
+svg
+{
+    background-color : #d7cec5;
+}
+
