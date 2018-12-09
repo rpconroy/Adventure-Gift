@@ -14,7 +14,9 @@ function Adventure(name)
     this.svg = d3.select('body').append('svg');
     this.getDims()
     this.svg.attr('width', this.width)
-    .attr('height', this.height);
+    .attr('height', this.height)
+    .append('g')
+    .attr('class', 'MovingG');
     this.POIs = [];
     this.name = name;
 
@@ -32,6 +34,23 @@ Adventure.prototype.initActionListeners = function()
     var zoom = d3.behavior.zoom();
     this.call(zoom);
 
+}
+function redraw()
+{
+        // d3.event.transform.k is scroll modifier
+       this.svg.interrupt();
+        var moveG = this.svg.select('g.movingG')
+        
+        moveG.attr("transform","translate("+d3.event.transform.k+",0");
+}
+function zoomAndPan(node)
+{
+    zoom = d3.zoom()
+            .on("zoom", redraw)
+            .on("start", function(){/* Add start cursor */});
+            .on("end", function(){/* Add end cursor */});
+            // Map Action Listeners
+    node.call(zoom);
 }
 Adventure.prototype.getDims = function()
 {
