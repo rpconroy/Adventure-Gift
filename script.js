@@ -40,7 +40,7 @@ Adventure.prototype.initActionListeners = function()
     this.moveSVG()
 
 }
-function redraw()
+Adventure.prototype.redraw = function() 
 {
         // d3.event.transform.k is scroll modifier
        this.svg.interrupt();
@@ -51,7 +51,7 @@ function redraw()
 Adventure.prototype.moveSVG = function() 
 {
     zoom = d3.zoom()
-            .on("zoom", redraw)
+            .on("zoom", this.redraw)
             .on("start", function(){/* Add start cursor */})
             .on("end", function(){/* Add end cursor */});
             // Map Action Listeners
