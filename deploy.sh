@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo cp * /var/www/html/AG/
+sudo cp -r * /var/www/html/AG/
 
