@@ -12,7 +12,7 @@ function Adventure(name)
     // Init adventure
     //
     this.svg = d3.select('body').append('svg');
-    this.getDims()
+    this.getDims();
     this.svg.attr('width', this.width)
             .attr('height', this.height)
     theG = this.svg.append('g')
@@ -23,11 +23,11 @@ function Adventure(name)
     this.POIs = [];
     this.name = name;
 
+    this.X = 0;
     // Choose scroll direction
 
     // Init ActionListeners(scrolldown, resize)
     this.initActionListeners()
-
     // Create Welcome mesage
     //
 }
@@ -40,20 +40,26 @@ Adventure.prototype.initActionListeners = function()
     this.moveSVG()
 
 }
-Adventure.prototype.redraw = function() 
+Adventure.prototype.redraw = function()
 {
-        // d3.event.transform.k is scroll modifier
-       this.svg.interrupt();
-        var moveG = this.svg.select('g.movingG')
-        
-        moveG.attr("transform","translate("+d3.event.transform.k+",0");
+    if(this.X === undefined)
+        this.X = 0;
+    var multiplier = 1.5;
+    console.log(d3.event.sourceEvent.wheelDeltaY);
+    console.log(this.X);
+    console.log(multiplier);
+    this.X += d3.event.sourceEvent.wheelDeltaY * multiplier;
+    // Amount the scroll is enhanced by
+    // d3.event.transform.k is scroll modifier
+    var moveG = d3.select('svg').select('g');
+    moveG.attr("transform","translate("+this.X+",0)");
 }
-Adventure.prototype.moveSVG = function() 
+Adventure.prototype.moveSVG = function()
 {
     zoom = d3.zoom()
             .on("zoom", this.redraw)
-            .on("start", function(){/* Add start cursor */})
-            .on("end", function(){/* Add end cursor */});
+            .on("start", function(){d3.select('svg').style('cursor', 'grabbing')})
+            .on("end", function(){d3.select('svg').style('cursor', 'pointer')});
             // Map Action Listeners
     this.svg.call(zoom);
 }
