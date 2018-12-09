@@ -14,9 +14,12 @@ function Adventure(name)
     this.svg = d3.select('body').append('svg');
     this.getDims()
     this.svg.attr('width', this.width)
-    .attr('height', this.height)
-    .append('g')
-    .attr('class', 'MovingG');
+            .attr('height', this.height)
+    theG = this.svg.append('g')
+            .attr('class', 'MovingG');
+    theG.append('rect')
+        .attr('x', 50).attr('y','50')
+        .attr('width','10px').attr('height','10px'); // test
     this.POIs = [];
     this.name = name;
 
@@ -28,11 +31,13 @@ function Adventure(name)
     // Create Welcome mesage
     //
 }
-
+function resize()
+{
+}
 Adventure.prototype.initActionListeners = function()
 {
-    var zoom = d3.behavior.zoom();
-    this.call(zoom);
+    window.addEventListener("resize", resize);
+    this.moveSVG()
 
 }
 function redraw()
@@ -43,14 +48,14 @@ function redraw()
         
         moveG.attr("transform","translate("+d3.event.transform.k+",0");
 }
-function zoomAndPan(node)
+Adventure.prototype.moveSVG = function() 
 {
     zoom = d3.zoom()
             .on("zoom", redraw)
-            .on("start", function(){/* Add start cursor */});
+            .on("start", function(){/* Add start cursor */})
             .on("end", function(){/* Add end cursor */});
             // Map Action Listeners
-    node.call(zoom);
+    this.svg.call(zoom);
 }
 Adventure.prototype.getDims = function()
 {

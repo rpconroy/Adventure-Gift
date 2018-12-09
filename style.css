@@ -4,13 +4,14 @@ html
 }
 body
 {
+    overflow : hidden;
     background-image : url('images/palm-leaf.png');
     background-repeat : repeat;
     margin:0;
-    opacity : .5;
 }
 svg
 {
     background-color : #d7cec5;
+    opacity : .5;
 }
 
