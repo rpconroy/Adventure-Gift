@@ -60,7 +60,7 @@ Adventure.prototype.advanceFootprint = function(pos)
     var deltaY = Math.sin(dirInRads) * stepDistance * pos;
     footX = footX + deltaX;
     footY = footY + deltaY;
-    var variability = 10;
+    var variability = 20;
     moveG.attr("transform","translate("+footX+","+footY+")");
     directionChange = (Math.random()*variability) - (variability/2);
     direction += directionChange;
@@ -157,8 +157,11 @@ Adventure.prototype.addPOI = function(poi)
 ///////////////////////////////////
 
 // POI constuctor
-function POI()
+function POI(name, description, image)
 {
+    this.name = name;
+    this.description = description
+    this.image = image;
 }
 
 // Adds the location name
