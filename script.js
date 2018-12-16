@@ -6,12 +6,12 @@
 //
 ///////////////////
 
+var scrollX = 0;
 function Adventure(name)
 {
     //
     // Init adventure
     //
-    this.scrollX = 0;
     this.direction = 45; //deg
     this.footX = 10;
     this.footY = 10;
@@ -49,10 +49,10 @@ function degToRadians(deg)
 }
 direction = 45;
 footX = 10;
-footY = 10
-function advanceFootprint(pos)
+footY = 10;
+test = 0;
+Adventure.prototype.advanceFootprint = function(pos)
 {
-
     var moveG = d3.select('svg').select('g');
     stepDistance = 5;
     dirInRads = degToRadians(direction);
@@ -64,26 +64,62 @@ function advanceFootprint(pos)
     moveG.attr("transform","translate("+footX+","+footY+")");
     directionChange = (Math.random()*variability) - (variability/2);
     direction += directionChange;
+    d3.select('body').style('background-position', footX/2 +"px "+ footY/2 + "px");
+
+    test++;
+    if(test%20==0)
+        this.drawFootprint(direction);
 
     //d3.select('rect').attr('x', .footX)
     //.attr('y',.footY)
 }
-Adventure.prototype.drawFootprint = function()
+myswitch = 0;
+Adventure.prototype.drawFootprint = function(dir)
 {
+
+    // Get the center of the screen
+    var centerX = this.width/2;
+    var centerY = this.height/2;
+    console.log(centerX);
+    console.log(footX);
+    console.log(centerY);
+    console.log(footY);
+    var holdingG = theG.append('g')
+    .attr('transform','translate('+(centerX - footX)+','+(centerY - footY)+')');
+    var footPrint = holdingG.append('image')
+    .attr('transform','rotate('+(dir+90)+')')
+    .attr('width', '30px')
+    .attr('height', '45px')
+    .attr('xlink:href','images/shoe.svg')
+    .style('opacity','1');
+    if(myswitch == 0)
+    {
+        footPrint
+    .attr('transform','rotate('+(dir+180+90)+')scale(1,-1)')
+        myswitch = 1;
+    }
+    else
+    {
+        myswitch = 0;
+    }
+        //<image x="10" y="20" width="80" height="80" xlink:href="recursion.svg" />
+
+
+
+
 }
 Adventure.prototype.redraw = function()
 {
-    if(this.scrollX === undefined)
-        this.scrollX = 0;
+    console.log(this);
     var multiplier = 1.5;
     console.log(d3.event.sourceEvent.wheelDeltaY);
-    console.log(this.scrollX);
+    mmktest = d3.event
     console.log(multiplier);
-    this.scrollX += d3.event.sourceEvent.wheelDeltaY * multiplier;
+    scrollX += d3.event.sourceEvent.wheelDeltaY * multiplier;
     if(d3.event.sourceEvent.wheelDeltaY < 0)
-        advanceFootprint(1);
+       this.advanceFootprint(-1);
     else
-        advanceFootprint(-1);
+        this.advanceFootprint(-1); // -1 to go backwards
     // Amount the scroll is enhanced by
     // d3.event.transform.k is scroll modifier
 //    var moveG = d3.select('svg').select('g');
@@ -92,7 +128,7 @@ Adventure.prototype.redraw = function()
 Adventure.prototype.moveSVG = function()
 {
     zoom = d3.zoom()
-            .on("zoom", this.redraw)
+            .on("zoom", () => {this.redraw()})
             .on("start", function(){d3.select('svg').style('cursor', 'url("images/mmk.png"), pointer')})
             .on("end", function(){d3.select('svg').style('cursor', 'pointer')});
             // Map Action Listeners
