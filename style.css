@@ -12,7 +12,8 @@ body
 }
 svg
 {
+    background-image : url('images/palm-leaf.png');
+    background-repeat : repeat;
     background-color : #d7cec5;
-    opacity : .5;
 }
 

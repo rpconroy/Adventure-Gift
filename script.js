@@ -64,7 +64,7 @@ Adventure.prototype.advanceFootprint = function(pos)
     moveG.attr("transform","translate("+footX+","+footY+")");
     directionChange = (Math.random()*variability) - (variability/2);
     direction += directionChange;
-    d3.select('body').style('background-position', footX/2 +"px "+ footY/2 + "px");
+    this.svg.style('background-position', footX/10 +"px "+ footY/10 + "px");
 
     test++;
     if(test%20==0)
