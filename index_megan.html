@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src='script.js'></script>
+        <script src='d3.v5.min.js'></script>
+    <script>
+
+window.onload = function()
+        {
+myAdventure = new Adventure('Megan and Dakota');
+            var description_1 = "Your first destination is a visit to the  brewery for a tour and sampling";
+            firstPOI = new POI('Brewery Tour', 'description_1', 'images/meg/')
+            myAdventure.addPOI(firstPOI);
+
+            var description_2 = "Enjoy a relaxing walk on the beltline on your way to your next destination";
+            secondPOI = new POI('Go for a walk!', 'description_2', 'images/meg/beltline_1.jpg')
+            myAdventure.addPOI(secondPOI);
+
+            var description_3 = "Your final destination is a visit to the botanical gardens light show!";
+            lastPOI = new POI('Christmas Lights!', 'description_3', 'images/meg/botanicalLights.jpg', 'https://atlantabg.org/plan-your-visit/atlanta-garden-calendar/garden-lights-holiday-nights/')
+            myAdventure.addPOI(lastPOI);
+        };
+    </script>
+
+    </head>
+    <body>
+    </body>
+</html>
