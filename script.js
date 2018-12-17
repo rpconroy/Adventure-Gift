@@ -12,6 +12,8 @@ function Adventure(name)
     //
     // Init adventure
     //
+    this.POIs = [];
+    this.name = name;
     this.direction = 45; //deg
     this.footX = 10;
     this.footY = 10;
@@ -21,11 +23,28 @@ function Adventure(name)
             .attr('height', this.height)
     theG = this.svg.append('g')
             .attr('class', 'MovingG');
-    theG.append('rect')
-        .attr('x', this.footX).attr('y',this.footY)
-        .attr('width','10px').attr('height','10px'); // test
-    this.POIs = [];
-    this.name = name;
+    this.introDiv = d3.select('body')
+        .append('div')
+        .attr('id','introDiv')
+        .style('width', this.width + "px")
+        .style('height', this.height  + "px")
+    this.introDiv.append('p')
+        .style('margin-top', '15%')
+        .style('margin-bottom', '0px')
+        .text('Welcome to Your Adventure')
+    this.introDiv
+        .append('p')
+        .style('font-size','2.5em')
+        .style('margin-top', '10px')
+        .style('margin-bottom', '10px')
+        .text(this.name);
+    this.introDiv
+    .append('div')
+    .style('font-size', '.5em')
+    .text('(Scroll or drag to continue)');
+
+
+
 
     // Choose scroll direction
 
@@ -110,6 +129,18 @@ Adventure.prototype.drawFootprint = function(dir)
 }
 Adventure.prototype.redraw = function()
 {
+    opacity = this.introDiv.style('opacity');
+    if(opacity > 0)
+    {
+        eleTop = parseInt(this.introDiv.style('top').slice(0,-2));
+        eleLeft = parseInt(this.introDiv.style('left').slice(0,-2));
+        console.log(eleTop+" "+eleLeft);
+        this.introDiv.style('opacity', opacity - .05)
+        .style('top', (eleTop-1)+'px')
+        .style('left', (eleLeft-1)+'px')
+    }
+    else
+        this.introDiv.remove();
     console.log(this);
     var multiplier = 1.5;
     console.log(d3.event.sourceEvent.wheelDeltaY);
