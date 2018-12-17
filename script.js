@@ -76,8 +76,8 @@ Adventure.prototype.advanceFootprint = function(pos)
     var moveG = d3.select('svg').select('g');
     stepDistance = 5;
     dirInRads = degToRadians(direction);
-    var deltaX = Math.cos(dirInRads) * stepDistance * pos;
-    var deltaY = Math.sin(dirInRads) * stepDistance * pos;
+    var deltaX = Math.floor(Math.cos(dirInRads) * stepDistance * pos);
+    var deltaY = Math.floor(Math.sin(dirInRads) * stepDistance * pos);
     footX = footX + deltaX;
     footY = footY + deltaY;
     var variability = 20;
@@ -147,14 +147,24 @@ Adventure.prototype.redraw = function()
 }
 Adventure.prototype.spawnPOI = function()
 {
+
+    curPOI = this.POIs.shift();
     var xPos = Math.random() * this.width;
     var yPos = Math.random() * this.height;
-    var curPOI = d3.select('body')
+    var curPOIdiv = d3.select('body')
         .append('div')
         .classed('POI', true)
         .style('top', yPos + "px")
         .style('left', xPos + "px");
-    this.POIDivs.push(curPOI);
+    // fill in info
+    curPOIdiv.append('img')
+    .style('width', '100%')
+    .attr('src', curPOI.image);
+    curPOIdiv.append('p')
+    .text(curPOI.name);
+    curPOIdiv.append('div')
+    .text(curPOI.description);
+    this.POIDivs.push(curPOIdiv);
 }
 Adventure.prototype.updatePOIs = function(xStep, yStep)
 {
