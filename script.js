@@ -160,7 +160,7 @@ Adventure.prototype.moveSVG = function()
 {
     zoom = d3.zoom()
             .on("zoom", () => {this.redraw()})
-            .on("start", function(){d3.select('svg').style('cursor', 'url("images/mmk.png"), pointer')})
+            .on("start", function(){d3.select('svg').style('cursor', 'url("images/icons8-santa-48.png"), pointer')})
             .on("end", function(){d3.select('svg').style('cursor', 'pointer')});
             // Map Action Listeners
     this.svg.call(zoom);
