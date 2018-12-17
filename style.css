@@ -30,3 +30,12 @@ svg
     background: #cd8c5e;
     pointer-events : none;
 }
+.POI
+{
+    box-shadow : 0 0 15px -5px;
+    width : 250px;
+    height : 300px;
+    position : absolute;
+    border-radius : 4px; 
+    background : white;
+}
