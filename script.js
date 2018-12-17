@@ -13,6 +13,7 @@ function Adventure(name)
     // Init adventure
     //
     this.POIs = [];
+    this.POIDivs = [];
     this.name = name;
     this.direction = 45; //deg
     this.footX = 10;
@@ -84,7 +85,7 @@ Adventure.prototype.advanceFootprint = function(pos)
     directionChange = (Math.random()*variability) - (variability/2);
     direction += directionChange;
     this.svg.style('background-position', footX/10 +"px "+ footY/10 + "px");
-
+    this.updatePOIs(deltaX,deltaY);
     test++;
     if(test%20==0)
         this.drawFootprint(direction);
@@ -99,10 +100,6 @@ Adventure.prototype.drawFootprint = function(dir)
     // Get the center of the screen
     var centerX = this.width/2;
     var centerY = this.height/2;
-    console.log(centerX);
-    console.log(footX);
-    console.log(centerY);
-    console.log(footY);
     var holdingG = theG.append('g')
     .attr('transform','translate('+(centerX - footX)+','+(centerY - footY)+')');
     var footPrint = holdingG.append('image')
@@ -122,10 +119,6 @@ Adventure.prototype.drawFootprint = function(dir)
         myswitch = 0;
     }
         //<image x="10" y="20" width="80" height="80" xlink:href="recursion.svg" />
-
-
-
-
 }
 Adventure.prototype.redraw = function()
 {
@@ -134,18 +127,14 @@ Adventure.prototype.redraw = function()
     {
         eleTop = parseInt(this.introDiv.style('top').slice(0,-2));
         eleLeft = parseInt(this.introDiv.style('left').slice(0,-2));
-        console.log(eleTop+" "+eleLeft);
         this.introDiv.style('opacity', opacity - .05)
         .style('top', (eleTop-1)+'px')
         .style('left', (eleLeft-1)+'px')
     }
     else
         this.introDiv.remove();
-    console.log(this);
     var multiplier = 1.5;
-    console.log(d3.event.sourceEvent.wheelDeltaY);
     mmktest = d3.event
-    console.log(multiplier);
     scrollX += d3.event.sourceEvent.wheelDeltaY * multiplier;
     if(d3.event.sourceEvent.wheelDeltaY < 0)
        this.advanceFootprint(-1);
@@ -155,6 +144,32 @@ Adventure.prototype.redraw = function()
     // d3.event.transform.k is scroll modifier
 //    var moveG = d3.select('svg').select('g');
    // moveG.attr("transform","translate("+this.scrollX+",0)");
+}
+Adventure.prototype.spawnPOI = function()
+{
+    var xPos = Math.random() * this.width;
+    var yPos = Math.random() * this.height;
+    var curPOI = d3.select('body')
+        .append('div')
+        .classed('POI', true)
+        .style('top', yPos + "px")
+        .style('left', xPos + "px");
+    this.POIDivs.push(curPOI);
+}
+Adventure.prototype.updatePOIs = function(xStep, yStep)
+{
+    for(i=0; i < this.POIDivs.length; i++)
+    {
+        var curPOI = this.POIDivs[i];
+        eleTop = parseInt(curPOI.style('top').slice(0,-2));
+        eleLeft = parseInt(curPOI.style('left').slice(0,-2));
+        console.log(eleTop+ " " + eleLeft);
+        console.log(xStep+ " " + yStep);
+        curPOI
+        .style('top', (eleTop+yStep)+'px')
+        .style('left', (eleLeft+xStep)+'px');
+    }
+
 }
 Adventure.prototype.moveSVG = function()
 {
