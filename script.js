@@ -65,19 +65,41 @@ Adventure.prototype.initActionListeners = function()
 }
 function degToRadians(deg)
 {
-    return deg * ( (2*Math.PI)/360 )
+    return deg * ( (2*Math.PI)/360 );
+}
+function radsToDeg(rads)
+{
+    return rads * 360/ (2*Math.PI);
 }
 direction = 45;
 footX = 10;
 footY = 10;
-test = 0;
+numSteps = 0;
 Adventure.prototype.advanceFootprint = function(pos)
 {
     var moveG = d3.select('svg').select('g');
     stepDistance = 5;
     dirInRads = degToRadians(direction);
-    var deltaX = Math.cos(dirInRads) * stepDistance * pos;
-    var deltaY = Math.sin(dirInRads) * stepDistance * pos;
+    var deltaX;
+    var deltaY;
+    if(this.POIDivs.length != 0)//then random dir
+    {
+        var centerX = this.width/2;
+        var centerY = this.height/2;
+        var divX = this.POIDivs[0].x;
+        var divY = this.POIDivs[0].y;
+
+        console.log('divx' + divX);
+        console.log('divy' + divY);
+
+        dirInRads = Math.atan((divY-centerY)/(divX-centerX));
+        if(divX < centerX)
+            dirInRads = Math.PI+dirInRads;
+        direction = radsToDeg(dirInRads);
+        console.log(dirInRads);
+    }
+    deltaX = Math.floor(Math.cos(dirInRads) * stepDistance * pos);
+    deltaY = Math.floor(Math.sin(dirInRads) * stepDistance * pos);
     footX = footX + deltaX;
     footY = footY + deltaY;
     var variability = 20;
@@ -86,9 +108,11 @@ Adventure.prototype.advanceFootprint = function(pos)
     direction += directionChange;
     this.svg.style('background-position', footX/10 +"px "+ footY/10 + "px");
     this.updatePOIs(deltaX,deltaY);
-    test++;
-    if(test%20==0)
+    numSteps++;
+    if(numSteps%20==0)
         this.drawFootprint(direction);
+    if(numSteps % 200 == 0 && this.POIDivs.length == 0)
+        this.spawnPOI()
 
     //d3.select('rect').attr('x', .footX)
     //.attr('y',.footY)
@@ -134,7 +158,6 @@ Adventure.prototype.redraw = function()
     else
         this.introDiv.remove();
     var multiplier = 1.5;
-    mmktest = d3.event
     scrollX += d3.event.sourceEvent.wheelDeltaY * multiplier;
     if(d3.event.sourceEvent.wheelDeltaY < 0)
        this.advanceFootprint(-1);
@@ -147,20 +170,44 @@ Adventure.prototype.redraw = function()
 }
 Adventure.prototype.spawnPOI = function()
 {
+
+    curPOI = this.POIs.shift();
     var xPos = Math.random() * this.width;
     var yPos = Math.random() * this.height;
-    var curPOI = d3.select('body')
+    /*var target = theG
+        .append('g')
+        .attr('transform', 'translate('+xPos+','+yPos+')')
+        .append('circle')
+        .attr('r', '5px');*/
+
+    var curPOIdiv = d3.select('body')
         .append('div')
         .classed('POI', true)
         .style('top', yPos + "px")
         .style('left', xPos + "px");
-    this.POIDivs.push(curPOI);
+    //curPOIdiv
+     //   .append('div')
+    // fill in info
+    curPOIdiv.append('img')
+    .style('width', '100%')
+    .attr('src', curPOI.image);
+    curPOIdiv.append('p')
+    .text(curPOI.name);
+    curPOIdiv.append('div')
+    .classed('POIdescription', true)
+    .text(curPOI.description);
+    divObj = {
+        'div' : curPOIdiv,
+        'x' : xPos,
+        'y' : yPos
+    }
+    this.POIDivs.push(divObj);
 }
 Adventure.prototype.updatePOIs = function(xStep, yStep)
 {
     for(i=0; i < this.POIDivs.length; i++)
     {
-        var curPOI = this.POIDivs[i];
+        var curPOI = this.POIDivs[i].div;
         eleTop = parseInt(curPOI.style('top').slice(0,-2));
         eleLeft = parseInt(curPOI.style('left').slice(0,-2));
         console.log(eleTop+ " " + eleLeft);
@@ -168,6 +215,8 @@ Adventure.prototype.updatePOIs = function(xStep, yStep)
         curPOI
         .style('top', (eleTop+yStep)+'px')
         .style('left', (eleLeft+xStep)+'px');
+        this.POIDivs[i].x = eleLeft+xStep;
+        this.POIDivs[i].y = eleTop+yStep;
     }
 
 }
