@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src='script.js'></script>
+        <script src='d3.v5.min.js'></script>
+    <script>
+window.onload = function()
+        {
+myAdventure = new Adventure('Linnea and Cledwyn');
+            var description_1 = "Your first destination is to go to ...!";
+            firstPOI = new POI('', description_1, '', '')
+            myAdventure.addPOI(firstPOI);
+
+            var description_2 = "";
+            secondPOI = new POI('', description_2, '', '')
+            myAdventure.addPOI(secondPOI);
+
+            var description_3 = "";
+            lastPOI = new POI('', description_3, '', '')
+            myAdventure.addPOI(lastPOI);
+        };
+
+        
+    </script>
+
+    </head>
+    <body>
+    </body>
+</html>
