@@ -73,24 +73,28 @@ function radsToDeg(rads)
 }
 Adventure.prototype.showPresent = function()
 {
-
-    var curPOI = this.POIDivs[0].div;
+    var curPOI = this.POIDivs[0]
+    var curPOIDiv = curPOI.div;
     curPOI.displayed = true;
-    curPOI.transition()
+    console.log((curPOI.y - 150))
+    console.log((curPOI.x - 150))
+    curPOIDiv.transition()
     .duration(1000)
     .style('width', '300px')
     .style('height', '300px')
+    .style('top', (curPOI.y - 150) + 'px')
+    .style('left', (curPOI.x - 150) + 'px')
     .on('end', function(){
         d3.selectAll('.POIdescription').style('display', 'block')
         d3.selectAll('.title').style('display', 'block')
-        curPOI.style('height', 'unset');
+        d3.selectAll('.acceptBut').style('display', 'inline-block')
+        curPOIDiv.style('height', 'unset');
     });
-    d3.select('.presentImg')
+    d3.selectAll('.presentImg')
         .transition()
         .delay(1000)
         .duration(2000)
         .style('opacity', 0);
-
 }
 direction = 45;
 footX = 10;
@@ -119,11 +123,11 @@ Adventure.prototype.advanceFootprint = function(pos)
         console.log(centerY);
         if(( diffX < range  && diffX > -range) && (diffY < range  && diffY > -range))//show present
         {
-            if(!this.POIDivs[0].displayed)
+            if(this.POIDivs[0].displayed === false)
             {
                 this.showPresent();
-            }
                 console.log('present');
+            }
             return;
         }
 
@@ -205,6 +209,20 @@ Adventure.prototype.redraw = function()
 //    var moveG = d3.select('svg').select('g');
    // moveG.attr("transform","translate("+this.scrollX+",0)");
 }
+POIoffset = 0;
+Adventure.prototype.storePOI = function()
+{
+    var curPOI = this.POIDivs.shift();
+    console.log(curPOI);
+    var curPOIDiv = curPOI.div;
+    curPOIDiv.select('button').remove();
+    curPOIDiv.transition()
+    .style('top', "0px")
+    .style('left', POIoffset+"px");
+    POIoffset += 300;
+
+
+}
 Adventure.prototype.spawnPOI = function()
 {
 
@@ -259,11 +277,12 @@ Adventure.prototype.spawnPOI = function()
     .text('Website Link');
     curPOIdiv.append('div')
     .classed('presentImg', true);
-    /*curPOIdiv.append('div')
+    curPOIdiv.append('div')
     .style('text-align', 'center')
     .append('button')
     .classed('acceptBut', true)
-    .text("Awesome!")*/
+    .text("Awesome!")
+    .on('click', () => {this.storePOI()});
 
     divObj = {
         'div' : curPOIdiv,

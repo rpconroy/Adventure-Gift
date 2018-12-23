@@ -32,8 +32,17 @@ svg
 }
 .acceptBut
 {
-    width : 75px;
     height : 30px;
+    margin-left : 5px;
+    margin-right : 5px;
+    margin-bottom : 10px;
+    background : green;
+    color : white;
+    cursor : pointer;
+    border : 1px dotted white;
+    border-radius : 5px;
+    display: none;
+    
 }
 .title
 {
@@ -57,6 +66,7 @@ svg
 {
     margin : 5px;
     display: none;
+    text-align : center;
 }
 .presentImg
 {
