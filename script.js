@@ -71,6 +71,27 @@ function radsToDeg(rads)
 {
     return rads * 360/ (2*Math.PI);
 }
+Adventure.prototype.showPresent = function()
+{
+
+    var curPOI = this.POIDivs[0].div;
+    curPOI.displayed = true;
+    curPOI.transition()
+    .duration(1000)
+    .style('width', '300px')
+    .style('height', '300px')
+    .on('end', function(){
+        d3.selectAll('.POIdescription').style('display', 'block')
+        d3.selectAll('.title').style('display', 'block')
+        curPOI.style('height', 'unset');
+    });
+    d3.select('.presentImg')
+        .transition()
+        .delay(1000)
+        .duration(2000)
+        .style('opacity', 0);
+
+}
 direction = 45;
 footX = 10;
 footY = 10;
@@ -82,15 +103,31 @@ Adventure.prototype.advanceFootprint = function(pos)
     dirInRads = degToRadians(direction);
     var deltaX;
     var deltaY;
-    if(this.POIDivs.length != 0)//then random dir
+    if(this.POIDivs.length != 0)//then follow present
     {
         var centerX = this.width/2;
         var centerY = this.height/2;
         var divX = this.POIDivs[0].x;
         var divY = this.POIDivs[0].y;
 
+        var range = 5;
+        var diffX = divX - centerX;
+        var diffY = divY - centerY;
         console.log('divx' + divX);
         console.log('divy' + divY);
+        console.log(centerX);
+        console.log(centerY);
+        if(( diffX < range  && diffX > -range) && (diffY < range  && diffY > -range))//show present
+        {
+            if(!this.POIDivs[0].displayed)
+            {
+                this.showPresent();
+            }
+                console.log('present');
+            return;
+        }
+
+
 
         dirInRads = Math.atan((divY-centerY)/(divX-centerX));
         if(divX < centerX)
@@ -172,8 +209,25 @@ Adventure.prototype.spawnPOI = function()
 {
 
     curPOI = this.POIs.shift();
-    var xPos = Math.random() * this.width;
+    var onX = Math.random();
+    var xPos;
+    var yPos;
+    if(onX > .5)
+    {
+        var xPos = Math.random() * this.width;
+        if(onX > .75)
+            var yPos = this.height;
+        else
+            yPos = 10;
+    }
+    else
+    {
     var yPos = Math.random() * this.height;
+        if(onX < .25)
+            xPos = this.width;
+        else
+            xPos = 10;
+    }
     /*var target = theG
         .append('g')
         .attr('transform', 'translate('+xPos+','+yPos+')')
@@ -183,6 +237,8 @@ Adventure.prototype.spawnPOI = function()
     var curPOIdiv = d3.select('body')
         .append('div')
         .classed('POI', true)
+        .style('width', '100px')
+        .style('height', '100px')
         .style('top', yPos + "px")
         .style('left', xPos + "px");
     //curPOIdiv
@@ -192,16 +248,31 @@ Adventure.prototype.spawnPOI = function()
     .style('width', '100%')
     .attr('src', curPOI.image);
     curPOIdiv.append('p')
+    .classed("title",true)
     .text(curPOI.name);
+    var desc = curPOIdiv.append('div')
+    .classed('POIdescription', true);
+    desc.text(curPOI.description);
+    desc.append('br');
+    desc.append('a')
+    .attr('href',curPOI.link)
+    .text('Website Link');
     curPOIdiv.append('div')
-    .classed('POIdescription', true)
-    .text(curPOI.description);
+    .classed('presentImg', true);
+    /*curPOIdiv.append('div')
+    .style('text-align', 'center')
+    .append('button')
+    .classed('acceptBut', true)
+    .text("Awesome!")*/
+
     divObj = {
         'div' : curPOIdiv,
         'x' : xPos,
-        'y' : yPos
+        'y' : yPos,
+        'displayed' : false
     }
     this.POIDivs.push(divObj);
+
 }
 Adventure.prototype.updatePOIs = function(xStep, yStep)
 {
@@ -252,11 +323,12 @@ Adventure.prototype.addPOI = function(poi)
 ///////////////////////////////////
 
 // POI constuctor
-function POI(name, description, image)
+function POI(name, description, image, link)
 {
     this.name = name;
     this.description = description
     this.image = image;
+    this.link = link;
 }
 
 // Adds the location name

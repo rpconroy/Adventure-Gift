@@ -2,6 +2,7 @@ html
 {
     overflow : hidden;
     cursor : url('images/icons8-santa-48.png'), pointer;
+    font-family : fantasy;
 }
 body
 {
@@ -18,7 +19,6 @@ svg
 }
 #introDiv
 {
-    font-family : fantasy;
     font-size : 3em;
     color : white;
     text-align : center;
@@ -30,16 +30,43 @@ svg
     background: #cd8c5e;
     pointer-events : none;
 }
+.acceptBut
+{
+    width : 75px;
+    height : 30px;
+}
+.title
+{
+    font-size : 1.3em;
+    text-align : center;
+    margin-left : 5px;
+    margin-right : 5px;
+    display : none;
+}
 .POI
 {
-    box-shadow : 0 0 15px -5px;
-    width : 250px;
-    height : 300px;
+    box-shadow : 0 0 15px -5px black;
+    width : 300px;
+    /*height : 300px;*/
     position : absolute;
     border-radius : 4px; 
-    background : white;
+    background : #bf1f1f;
+    color : white;
 }
 .POIdescription
 {
     margin : 5px;
+    display: none;
+}
+.presentImg
+{
+    position : absolute;
+    background : url('images/present.png') purple;
+    background-size : cover;
+    background-position : center center;
+    height : 100%;
+    opacity : 1;
+    pointer-events : none;
+    width : 100%;
+    top : 0;
 }
