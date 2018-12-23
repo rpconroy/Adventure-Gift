@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src='script.js'></script>
+        <script src='d3.v5.min.js'></script>
+    <script>
+
+window.onload = function()
+        {
+myAdventure = new Adventure('Megan and Dakota');
+            var description_1 = "Your first destination is a visit to the Jimmy Carter Presidential Library. Hours of operation are from 9 AM to 4:45 PM (opens later on Sundays). \n Rumor is that there's a life-size a replica of the Oval Office!";
+            firstPOI = new POI('Library Tour', description_1, 'images/meg/meg_2_Lib.jpg', 'Jimmycarterlibrary.gov')
+            myAdventure.addPOI(firstPOI);
+
+            var description_2 = "Your next destination is a visit to the New Realm Brewery for a tour and sampling! Tours are offered on a walk-in basis every hour on the hour according to the following schedule: Fridays 4-9 PM; Saturdays 12-8 PM; Sundays 1-6 PM. The tour comes with four 4oz taster pours. Get yoself some good beer and settle in for your fun evening ahead!";
+            secondPOI = new POI('Brewery Tour', description_1, 'images/meg/meg_2_beer.jpg', 'https://newrealmbrewing.com/brewery-tours-ga/')
+            myAdventure.addPOI(firstPOI);
+
+            var description_3 = "Enjoy a night of laughter at the Laughing Skull Lounge! Since we don't know which day you want to go on your adventure date, we just have to refer you to the website to find out which show you want to go to.";
+            thirdPOI = new POI('Go laugh!', description_3, 'images/meg/meg_2_comedy', 'Laughingskulllounge.com')
+            myAdventure.addPOI(secondPOI);
+        };
+    </script>
+
+    </head>
+    <body>
+    </body>
+</html>
