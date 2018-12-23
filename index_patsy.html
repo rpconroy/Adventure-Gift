@@ -8,16 +8,16 @@
 window.onload = function()
         {
 myAdventure = new Adventure('Patsy and Dave');
-            var description_1 = "Buckle in for a day of fun on Thursday, January 10th in the great city of Washington DC! Your first destination is to open your senses at the botanical gardens. Our favorite room in the gardens is the desert, but watch out for the plants that'll get you!";
-            firstPOI = new POI('Go smell the flowers in winter!', description_1, '', 'https://www.usbg.gov')
+            var description_1 = "Buckle up for a day of fun on Thursday, January 10th in the great city of Washington DC! Your first destination is to open your senses at the botanical gardens. Our favorite room in the gardens is the desert, but watch out for the plants that'll get you!";
+            firstPOI = new POI('Go smell the flowers in winter!', description_1, 'images/patsy/patsy_garden.jpg', 'https://www.usbg.gov')
             myAdventure.addPOI(firstPOI);
 
             var description_2 = "Next, you have an early dinner reservation for two at acquaal2 nearby where you'll enjoy a cozy italian dinner on us! But hurry up...! Your next advanture awaits you.";
-            secondPOI = new POI('Dinner for two!', description_2, '', 'http://www.acquaal2.com')
+            secondPOI = new POI('Dinner for two!', description_2, 'images/patsy/patsy_dinner.jpg', 'http://www.acquaal2.com')
             myAdventure.addPOI(secondPOI);
 
-            var description_3 = "You've worked hard today, so now it's time to put your feet up, because your final destination is movie screening at the Library of Congress! \n Your feet may be up, but they might start tapping and dancing because you're going to see 'All that Jazz'";
-            lastPOI = new POI('Movie time!', description_3, '', 'https://www.eventbrite.com/e/fraudway-films-film-screenings-registration-48817390128?aff=eemailordconf&utm_campaign=order_confirm&utm_medium=email&ref=eemailordconf&utm_source=eb_email&utm_term=viewevent')
+            var description_3 = "You've worked hard today, so now it's time to put your feet up, because your final destination is movie screening at the Library of Congress! Your feet may be up, but they might start tapping and dancing because you're going to see 'All that Jazz.' We will forward you the confirmation email with your tickets. Have fun!";
+            lastPOI = new POI('Movie time!', description_3, 'images/patsy/patsy_movie.jpg', 'https://www.eventbrite.com/e/fraudway-films-film-screenings-registration-48817390128?aff=eemailordconf&utm_campaign=order_confirm&utm_medium=email&ref=eemailordconf&utm_source=eb_email&utm_term=viewevent')
             myAdventure.addPOI(lastPOI);
         };
 

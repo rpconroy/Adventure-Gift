@@ -8,16 +8,16 @@
 window.onload = function()
         {
 myAdventure = new Adventure('Linnea and Cledwyn');
-            var description_1 = "Your first destination is to go to ...!";
-            firstPOI = new POI('', description_1, '', '')
+            var description_1 = "Buckle up for a day of fun on Saturday, February 23rdh in the great city of Washington DC! Your first destination is to open your senses at the botanical gardens. Our favorite room in the gardens is the desert, but watch out for the plants that'll get you!";
+            firstPOI = new POI('Go smell flowers in the winter!', description_1, 'images/linnea/linnea_garden.jpg', 'https://www.usbg.gov')
             myAdventure.addPOI(firstPOI);
 
-            var description_2 = "";
-            secondPOI = new POI('', description_2, '', '')
+            var description_2 = "Next, you have an early dinner reservation for two at acquaal2 nearby where you'll enjoy a cozy italian dinner on us! But hurry up...! Your next advanture awaits you.";
+            secondPOI = new POI('Dinner for two!', description_2, 'images/linnea/linnea_dinner.jpg', 'http://www.acquaal2.com')
             myAdventure.addPOI(secondPOI);
 
-            var description_3 = "";
-            lastPOI = new POI('', description_3, '', '')
+            var description_3 = "You've worked hard today, so now it's time to put your feet up, because your final destination is movie screening at the Library of Congress! Your feet may be up, but they might start tapping and dancing because you're going to see 'All that Jazz.' We will forward you the confirmation email with your tickets. Have fun!";
+            lastPOI = new POI('Movie time!', description_3, 'images/linnea/linnea_movie.jpg', 'https://www.eventbrite.com/e/the-film-music-of-erich-korngold-film-screenings-registration-53594428378?aff=eemailordconf&utm_campaign=order_confirm&utm_medium=email&ref=eemailordconf&utm_source=eb_email&utm_term=viewevent')
             myAdventure.addPOI(lastPOI);
         };
 
