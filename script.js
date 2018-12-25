@@ -272,6 +272,7 @@ Adventure.prototype.spawnPOI = function()
     .classed('POIdescription', true);
     desc.text(curPOI.description);
     desc.append('br');
+    if(curPOI.link !== undefined)
     desc.append('a')
     .attr('href',curPOI.link)
     .text('Website Link');
@@ -314,8 +315,8 @@ Adventure.prototype.moveSVG = function()
 {
     zoom = d3.zoom()
             .on("zoom", () => {this.redraw()})
-            .on("start", function(){d3.select('svg').style('cursor', 'url("images/icons8-sleigh-48.png"), pointer')})
-            .on("end", function(){d3.select('svg').style('cursor', 'url("images/icons8-santa-48.png"), pointer')});
+            .on("start", function(){d3.select('svg').style('cursor', 'url("AG/images/icons8-sleigh-48.png"), pointer')})
+            .on("end", function(){d3.select('svg').style('cursor', 'url("AG/images/icons8-santa-48.png"), pointer')});
             // Map Action Listeners
     this.svg.call(zoom);
 }
