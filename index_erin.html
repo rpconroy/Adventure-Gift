@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src='script.js'></script>
+        <script src='d3.v5.min.js'></script>
+    <script>
+window.onload = function()
+        {
+myAdventure = new Adventure('Erin and Layth');
+            var description = "Your first destination is to go to the Dim Cave. Only 15km away from alanya, this beautiful cavern is sure to be a delight. According to the website, it was discovered in the year 3000!          *Guided Tour";
+            firstPOI = new POI('Go Spelunking!  *', description, 'images/erin/cave.jpg', 'http://www.dimcave.com.tr/index.php?lang=en&page=1')
+            myAdventure.addPOI(firstPOI);
+
+            var description_2 = "Walk or drive over to the river. There are a bunch of cafes ON the river. ";
+            secondPOI = new POI('Dim River!', description_2, 'images/erin/Dim_River.jpg', 'https://www.google.com/maps/place/Dim+%C3%87ay%C4%B1/@36.5479419,32.1275914,17z/data=!4m8!1m2!2m1!1scave+near+alanya!3m4!1s0x14dc9b818a806673:0x112acae01260361d!8m2!3d36.5479419!4d32.1275914')
+            myAdventure.addPOI(secondPOI);
+
+            var description_3 = "Your final destination is a visit to the ice castles!";
+            lastPOI = new POI('Ice Castle!', description_3, 'images/nancy/nancy_castle.jpg', 'https://events.discoverstillwater.com/event/copy-event-ice-castles-2018/')
+            myAdventure.addPOI(lastPOI);
+        };
+
+        
+    </script>
+
+    </head>
+    <body>
+    </body>
+</html>
