@@ -61,7 +61,6 @@ Adventure.prototype.initActionListeners = function()
 {
     window.addEventListener("resize", resize);
     this.moveSVG()
-
 }
 function degToRadians(deg)
 {
@@ -80,9 +79,9 @@ Adventure.prototype.showPresent = function()
     console.log((curPOI.x - 150))
     curPOIDiv.transition()
     .duration(1000)
-    .style('width', '300px')
-    .style('height', '300px')
-    .style('top', (curPOI.y - 150) + 'px')
+    .style('width', '350px')
+    .style('height', '350px')
+    .style('top', (curPOI.y - 250) + 'px')
     .style('left', (curPOI.x - 150) + 'px')
     .on('end', function(){
         d3.selectAll('.POIdescription').style('display', 'block')
@@ -171,7 +170,7 @@ Adventure.prototype.drawFootprint = function(dir)
     .attr('transform','rotate('+(dir+90)+')')
     .attr('width', '30px')
     .attr('height', '45px')
-    .attr('xlink:href','images/shoe.svg')
+    .attr('xlink:href','AG/images/shoe.svg')
     .style('opacity','1');
     if(myswitch == 0)
     {
@@ -219,7 +218,7 @@ Adventure.prototype.storePOI = function()
     curPOIDiv.transition()
     .style('top', "0px")
     .style('left', POIoffset+"px");
-    POIoffset += 300;
+    POIoffset += 350;
 
 
 }
@@ -292,6 +291,7 @@ Adventure.prototype.spawnPOI = function()
         'displayed' : false
     }
     this.POIDivs.push(divObj);
+    //setTimeout(() => {this.storePOI()}, 10000);
 
 }
 Adventure.prototype.updatePOIs = function(xStep, yStep)
