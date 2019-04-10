@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
-        <script src='script.js'></script>
-        <script src='d3.v5.min.js'></script>
+        <link rel="stylesheet" href="AG/style.css">
+        <script src='AG/script.js'></script>
+        <script src='AG/d3.v5.min.js'></script>
     <script>
 
 window.onload = function()
         {
 myAdventure = new Adventure('Megan and Dakota');
             var description_1 = "Welcome to your fun-filled adventure date! Your first destination is a visit to the Jimmy Carter Presidential Library. Hours of operation are from 9 AM to 4:45 PM (opens later on Sundays). \n Rumor is that there's a life-size a replica of the Oval Office!";
-            firstPOI = new POI('Library Tour', description_1, 'images/meg/meg_2_Lib.jpg', 'Jimmycarterlibrary.gov')
+            firstPOI = new POI('Library Tour', description_1, 'AG/images/meg/meg_2_Lib.jpg', 'Jimmycarterlibrary.gov')
             myAdventure.addPOI(firstPOI);
 
             var description_2 = "Your next destination is a visit to the New Realm Brewery for a tour and sampling! Tours are offered on a walk-in basis every hour on the hour according to the following schedule: Fridays 4-9 PM; Saturdays 12-8 PM; Sundays 1-6 PM. The tour comes with four 4oz taster pours. Get yoself some good beer and settle in for your fun evening ahead!";
-            secondPOI = new POI('Brewery Tour', description_1, 'images/meg/meg_2_beer.jpg', 'https://newrealmbrewing.com/brewery-tours-ga/')
-            myAdventure.addPOI(firstPOI);
+            secondPOI = new POI('Brewery Tour', description_2, 'AG/images/meg/meg_2_beer.jpg', 'https://newrealmbrewing.com/brewery-tours-ga/')
+            myAdventure.addPOI(secondPOI);
 
             var description_3 = "Enjoy a night of laughter at the Laughing Skull Lounge! Since we don't know which day you want to go on your adventure date, we just have to refer you to the website to find out which show you want to go to. Have fun!";
-            thirdPOI = new POI('Go laugh!', description_3, 'images/meg/meg_2_comedy.jpg', 'Laughingskulllounge.com')
-            myAdventure.addPOI(secondPOI);
+            thirdPOI = new POI('Go laugh!', description_3, 'AG/images/meg/meg_2_comedy.jpg', 'Laughingskulllounge.com')
+            myAdventure.addPOI(thirdPOI);
         };
     </script>
 
