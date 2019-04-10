@@ -339,7 +339,7 @@ function getAcceptText()
 {
     acceptTexts = ['Awesome!', 'Sounds Great!'
         ];
-    idx = Math.floor(Math.random * acceptTexts.length);
+    idx = Math.floor(Math.random() * acceptTexts.length);
     return idx;
 }
 
