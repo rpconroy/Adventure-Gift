@@ -281,7 +281,7 @@ Adventure.prototype.spawnPOI = function()
     .style('text-align', 'center')
     .append('button')
     .classed('acceptBut', true)
-    .text("Awesome!")
+    .text(getAcceptText())
     .on('click', () => {this.storePOI()});
 
     divObj = {
@@ -333,6 +333,14 @@ Adventure.prototype.addName = function(name)
 Adventure.prototype.addPOI = function(poi)
 {
     this.POIs.push(poi)
+}
+
+function getAcceptText()
+{
+    acceptTexts = ['Awesome!', 'Sounds Great!'
+        ];
+    idx = Math.floor(Math.random * acceptTexts.length);
+    return idx;
 }
 
 
